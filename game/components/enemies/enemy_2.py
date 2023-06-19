@@ -1,6 +1,7 @@
+import pygame
 import random
 from game.utils.constants import  SCREEN_WIDTH, SCREEN_HEIGHT, LEFT, RIGHT
-
+from game.components.enemies.shots import Disparos
 
 class Enemy_2:
     X_POS_LIST = [50, 150, 250, 350, 450, 550, 650, 750, 850, 950]
@@ -9,7 +10,7 @@ class Enemy_2:
     SPEED_Y = .5
     MOV_X = [LEFT, RIGHT]
     INTERVAL = 100
-
+    BALAS = pygame.sprite.Group()
 
 
     def __init__(self, image):
@@ -44,3 +45,12 @@ class Enemy_2:
                 self.index = 0
         self.index += 1
         
+    def disparo(self):
+	    bala = Disparos(self.rect.centerx, self.rect.top)
+            
+
+
+def update(self):
+        self.rec.y -= 25
+        if self.rect.bottom < 0:
+            self.kill()
