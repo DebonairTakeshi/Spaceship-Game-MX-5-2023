@@ -18,7 +18,7 @@ class EnemyHandler:
             enemy.draw(screen)
 
     def add_enemy(self):
-        if len(self.enemies) < 2:
+        if len(self.enemies) < 1:
             self.enemies.append(Ship())
             self.enemies.append(Enemy_2())
 
