@@ -17,7 +17,7 @@ BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
 
 HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 
-DEFAULT_TYPE = "default"
+DEFAULT_TYPE = 'default'
 SHIELD_TYPE = 'shield'
 
 SPACESHIP = pygame.image.load(os.path.join(IMG_DIR, "Spaceship/spaceship.png"))
@@ -29,6 +29,11 @@ ENEMY_1 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_1.png"))
 BOSS = pygame.image.load(os.path.join(IMG_DIR, "Enemy/miniboss.png"))
 
 FONT_STYLE = 'freesansbold.ttf'
+
+BULLET_ENEMY_TYPE = 'enemy'
+BULLET_PLAYER_TYPE = 'player'
+BULLET_SPACESHIP_TYPE = 'spaceship'
+
 
 LEFT = 'left'
 RIGHT = 'right'

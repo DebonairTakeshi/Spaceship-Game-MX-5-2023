@@ -1,9 +1,11 @@
 import pygame
-from game.components.enemies.enemy_2 import Enemy_2
+from game.components.enemies.enemy import Enemy
+
+
 from game.utils.constants import BOSS
 
 
-class Enemy_2(Enemy_2):
+class Boss(Enemy):
     WIDTH = 200
     HEIGHT = 200
 
