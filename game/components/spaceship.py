@@ -1,6 +1,6 @@
 import pygame
 from game.utils.constants import SPACESHIP, SCREEN_WIDTH
-from game.utils.constants import BULLET_SPACESHIP_TYPE
+from game.utils.constants import BULLET_SPACESHIP_TYPE, BULLET_PLAYER_LASER
 from game.components.bullets.bullet_handler import BulletHandler
 
 class Spaceship:
@@ -29,6 +29,8 @@ class Spaceship:
             self.move_down()
         elif user_input[pygame.K_SPACE]:
             self.shoot(bullet_handler)
+        elif user_input[pygame.K_s]:
+            self.shoot_special(bullet_handler)
         
     def draw(self, screen):
         screen.blit(self.image, self.rect)
@@ -48,3 +50,6 @@ class Spaceship:
         
     def shoot(self, bullet_handler):
         bullet_handler.add_bullet(BULLET_SPACESHIP_TYPE, self.rect.center)
+        
+    def shoot_special(self, bullet_handler):
+        bullet_handler.add_bullet(BULLET_PLAYER_LASER, self.rect.center)
