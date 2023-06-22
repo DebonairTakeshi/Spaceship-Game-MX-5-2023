@@ -1,11 +1,12 @@
-from game.utils.constants import BULLET_ENEMY_TYPE, BULLET_SPACESHIP_TYPE, BULLET_PLAYER_LASER
+from game.utils.constants import BULLET_ENEMY_TYPE, BULLET_SPACESHIP_TYPE, BULLET_SPACESHIP_TYPE2, SHIELD_TYPE
 from game.components.bullets.bullet_enemy import BulletEnemy
 from game.components.bullets.bullet_spaceship import BulletSpaceship
-from game.components.bullets.laser_spaceship import Laser
+from game.components.bullets.laser_spaceship import LaserSpaceship
+from game.components.bullets.shield_spaceship import ShieldSpaceship
 class BulletHandler:
     def __init__(self):
         self.bullets = []
-        self.laser = []
+        
 
     def update(self, player, enemies):
         for bullet in self.bullets:
@@ -14,7 +15,7 @@ class BulletHandler:
             elif type(bullet) is BulletSpaceship:
                 for enemy in enemies:
                     bullet.update(enemy)
-            elif type(bullet) is Laser:
+            elif type(bullet) is LaserSpaceship:
                 for enemy in enemies:
                     bullet.update(enemy)
             if not bullet.is_alive:
@@ -29,8 +30,14 @@ class BulletHandler:
             self.bullets.append(BulletEnemy(center))
         elif type == BULLET_SPACESHIP_TYPE:
             self.bullets.append(BulletSpaceship(center))
-        elif type == BULLET_PLAYER_LASER:
-            self.laser.append(Laser(center))
+        elif type == BULLET_SPACESHIP_TYPE2:
+            self.bullets.append(LaserSpaceship(center))
+        elif type == SHIELD_TYPE:
+            self.bullets.append(ShieldSpaceship(center))
 
     def remove_bullet(self, bullet):
         self.bullets.remove(bullet)
+        
+    def reset(self):
+        self.bullets = []
+       

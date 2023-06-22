@@ -1,19 +1,20 @@
 import pygame
-from game.components.bullets.laser import Laser
-from game.utils.constants import BULLET_PLAYER_LASER
+from game.components.bullets.bullet import Bullet
+from game.utils.constants import LASER_PLAYER
 
-class BulletSpaceship(Laser):
+class LaserSpaceship(Bullet):
     WIDTH = 10
-    HEIGHT = 20
+    HEIGHT = 100
     SPEED = 10
     
     
     def __init__(self, center):
-        self.image = BULLET_PLAYER_LASER
+        self.image = LASER_PLAYER
         self.image = pygame.transform.scale(self.image, (self.WIDTH, self.HEIGHT))
         super().__init__(self.image, center)
         
     def update(self, enemy):
         self.rect.y -= self.SPEED
         super().update(enemy)
-        
+        if not enemy.is_alive:
+            enemy.is_destroyed = True
