@@ -1,16 +1,19 @@
 import pygame
 
-from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, WHITE_COLOR, SPACE_INVADERS
+from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, WHITE_COLOR, SPACE_INVADERS, HEART
 from game.components.spaceship import Spaceship
 from game.components.enemies.enemyhandler import EnemyHandler
 from game.components.bullets.bullet_handler import BulletHandler
+from game.components.power_ups.power_up_handler import PowerUpHandler
 from game.utils.constants import BULLET_PLAYER_TYPE
+from game.utils.life import Life
 from game.utils import text_utils
 
 
 class Game:
     WIDTH = 50
     HEIGHT = 50
+    
     
     
     
@@ -28,7 +31,9 @@ class Game:
         self.player = Spaceship()
         self.enemy_handler = EnemyHandler()
         self.bullet_handler = BulletHandler()
-        self.number_death = 0
+        self.power_up_handler = PowerUpHandler()
+        self.lives = Life
+        self.number_death = 3
         self.score = 0
         
         
@@ -52,6 +57,7 @@ class Game:
             elif event.type == pygame.KEYDOWN and not self.playing:
                 self.playing = True
                 self.reset()
+        
             
 
     def update(self):
@@ -60,11 +66,18 @@ class Game:
             self.player.update(user_input, self.bullet_handler)
             self.enemy_handler.update(self.bullet_handler)
             self.bullet_handler.update(self.player, self.enemy_handler.enemies)
+            self.power_up_handler.update(self.player)
             self.score = self.enemy_handler.number_enemies_destroyed
+            
             if not self.player.is_alive:
-                pygame.time.delay(300)
+                ##pygame.time.delay(300)
+                
+                self.number_death -= 1
+                self.reset()
+            elif self.number_death < 1:
                 self.playing = False
-                self.number_death += 1
+                self.reset()
+                
 
     def draw(self):
         self.draw_background()
@@ -73,6 +86,8 @@ class Game:
             self.player.draw(self.screen)
             self.enemy_handler.draw(self.screen)
             self.bullet_handler.draw(self.screen)
+            self.power_up_handler.draw(self.screen)
+           
             self.draw_score()
             self.draw_deaths()
         else:
@@ -92,7 +107,8 @@ class Game:
     
     def draw_menu(self):
         
-        if self.number_death == 0:
+        if self.number_death == 3:
+            
             
             
             text, text_rect = text_utils.get_message('Press any Key to Start', 30, WHITE_COLOR)
@@ -117,7 +133,7 @@ class Game:
         self.screen.blit(score, score_rect)
         
     def draw_deaths(self):
-        deaths, death_rect = text_utils.get_message(f'Deaths: {self.number_death}', 20, WHITE_COLOR, 100, 40)
+        deaths, death_rect = text_utils.get_message(f'Lifes: {self.number_death}', 20, WHITE_COLOR, 100, 40)
         self.screen.blit(deaths, death_rect)
         
         
@@ -125,5 +141,7 @@ class Game:
         self.player.reset()
         self.enemy_handler.reset()
         self.bullet_handler.reset()
+        self.power_up_handler.reset()
+        self.number_death == 3
         
     
