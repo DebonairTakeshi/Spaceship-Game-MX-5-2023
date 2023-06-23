@@ -11,16 +11,17 @@ class PowerUpHandler:
         self.power_ups = []
         self.interval_time = 0
         
-    def update(self):
+    def update(self, player):
         self.interval_time += 1
         if self.interval_time % self.INTERVAL_TIME == 0:
             self.add_power_up()
             self.interval_time = 0
-        self.add_power_up()
+        
+        
         for power_up in self.power_ups:
-            power_up.update()
+            power_up.update(player)
             if power_up.is_used:
-                self.player.activate_power_up(power_up)
+                player.activate_power_up(power_up)
             if not power_up.is_alive:
                 self.remove_power_up(power_up)
             
