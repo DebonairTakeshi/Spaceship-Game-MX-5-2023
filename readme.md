@@ -13,8 +13,6 @@ tutorial
 Bullet collision
 
 
-
-
 ENEMIES
 Cucarachon
 K57

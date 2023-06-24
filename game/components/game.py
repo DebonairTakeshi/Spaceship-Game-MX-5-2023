@@ -115,13 +115,13 @@ class Game:
             tutorial, tutorial_rect = text_utils.get_message('Use SPACE to shoot', 20, WHITE_COLOR, height=SCREEN_HEIGHT//2 + 50)
             tutorial2, tutorial2_rect = text_utils.get_message('Use ARROWS to move', 20, WHITE_COLOR, height=SCREEN_HEIGHT//2 + 80)
             tutorial3, tutorial3_rect = text_utils.get_message('Use S for special attack', 20, WHITE_COLOR, height=SCREEN_HEIGHT//2 + 110)
-            tutorial4, tutorial4_rect = text_utils.get_message('Use D to activate your shield', 20, WHITE_COLOR, height=SCREEN_HEIGHT//2 + 130)
+            
             
             self.screen.blit(text, text_rect)
             self.screen.blit(tutorial, tutorial_rect)
             self.screen.blit(tutorial2, tutorial2_rect)
             self.screen.blit(tutorial3, tutorial3_rect)
-            self.screen.blit(tutorial4, tutorial4_rect)
+            
         else:
             text, text_rect = text_utils.get_message('Press any Key to Restart', 30, WHITE_COLOR)
             score, score_rect = text_utils.get_message(f'Your score is: {self.score}', 30, WHITE_COLOR, height=SCREEN_HEIGHT//2 + 50)
