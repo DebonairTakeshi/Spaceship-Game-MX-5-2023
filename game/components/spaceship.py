@@ -3,6 +3,9 @@ from game.utils.constants import SPACESHIP, SCREEN_WIDTH, SPACESHIP_SHIELD
 from game.utils.constants import BULLET_SPACESHIP_TYPE, BULLET_SPACESHIP_TYPE2, SHIELD_TYPE
 from game.components.bullets.bullet_handler import BulletHandler
 from game.components.power_ups.shield import Shield
+from os import path
+
+
 
 class Spaceship:
     WIDTH = 40
@@ -11,7 +14,7 @@ class Spaceship:
     Y_POS = 500
     SHOOTING_TIME = 30
     LIFES = 3
-    
+    pygame.mixer.init()
 
     def __init__(self):
         self.image = SPACESHIP
@@ -22,6 +25,10 @@ class Spaceship:
         self.is_alive = True
         self.has_shield = False
         self.time_up = 0
+        
+        self.sound_shoot = pygame.mixer.Sound('shoot.wav')
+        self.sound_laser = pygame.mixer.Sound('laser.wav')
+        self.sound_power_up = pygame.mixer.Sound('pickup.wav')
 
     def update(self, user_input, bullet_handler):
         
@@ -63,9 +70,12 @@ class Spaceship:
         
     def shoot(self, bullet_handler):
         bullet_handler.add_bullet(BULLET_SPACESHIP_TYPE, self.rect.center)
+        self.sound_shoot.play()
+        
         
     def shoot_special(self, bullet_handler):
         bullet_handler.add_bullet(BULLET_SPACESHIP_TYPE2, self.rect.center)
+        self.sound_laser.play()
     
     def activate_shield(self, bullet_handler):
         bullet_handler.add_bullet(SHIELD_TYPE, self.rect.center)
@@ -76,6 +86,7 @@ class Spaceship:
             self.has_shield = True
             self.image = SPACESHIP_SHIELD
             self.image = pygame.transform.scale(self.image, (self.WIDTH, self.HEIGTH + 2))
+            self.sound_power_up.play()
     
     def deactivate_power_up(self):
         self.has_shield = False

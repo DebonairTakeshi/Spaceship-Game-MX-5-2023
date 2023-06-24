@@ -3,7 +3,7 @@ from game.components.enemies.enemy import Enemy
 from game.utils.constants import ENEMY_1
 
 
-class Ship(Enemy):
+class Lytos(Enemy):
     WIDTH = 40
     HEIGHT = 60
 

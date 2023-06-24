@@ -1,5 +1,5 @@
-from game.components.enemies.ship import Ship
-from game.components.enemies.miniBoss import Boss
+from game.components.enemies.Lytos import Lytos
+from game.components.enemies.k57 import K57
 from game.components.enemies.cucarachon import Cucarachon
 
 
@@ -23,8 +23,8 @@ class EnemyHandler:
 
     def add_enemy(self):
         if len(self.enemies) < 1:
-            self.enemies.append(Ship())
-            self.enemies.append(Boss())
+            self.enemies.append(Lytos())
+            self.enemies.append(K57())
             self.enemies.append(Cucarachon())
 
     def remove_enemy(self, enemy):

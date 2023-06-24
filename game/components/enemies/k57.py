@@ -5,7 +5,7 @@ from game.components.enemies.enemy import Enemy
 from game.utils.constants import BOSS
 
 
-class Boss(Enemy):
+class K57(Enemy):
     WIDTH = 200
     HEIGHT = 200
 
